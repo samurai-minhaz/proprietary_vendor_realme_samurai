@@ -6,4 +6,52 @@ LOCAL_PATH := $(call my-dir)
 
 ifeq ($(TARGET_DEVICE),samurai)
 
+# Android 16 (Baklava) Ultimate Optimization - Samurai-Minhaz
+TARGET_USES_VULKAN := true
+TARGET_USES_ION := true
+BOARD_AVB_ENABLE := false
+BOARD_VNDK_VERSION := current
+PRODUCT_SHIPPING_API_LEVEL := 36
+BOARD_API_LEVEL := 202504
+BOARD_KERNEL_PAGESIZE := 16384
+TARGET_NO_BIONIC_64K_INTEROP := true
+
+# Maintainer Signature
+PRODUCT_BUILD_PROP_FLAGS += ro.rom.maintainer=Samurai-Minhaz
+
+# System Performance & Ultra-Smooth 90Hz Display
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.surface_flinger.set_idle_timer_ms=4000 \
+    ro.surface_flinger.set_touch_timer_ms=200 \
+    ro.vendor.perf.scroll_opt=1 \
+    windowsmgr.max_events_per_sec=150
+
+# Camera HAL3 & Advanced GCam Support
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.camera.HAL3.enabled=1 \
+    persist.vendor.camera.eis.enable=1 \
+    persist.vendor.camera.privapp.list=com.google.android.GoogleCamera,com.google.android.GoogleCamera.BSG,com.google.android.GoogleCamera.LMC
+
+# Premium Audio Stack (JamesDSP/ViPER4Android/Dolby Atmos)
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.audio.hifi=true \
+    ro.vendor.audio.sdk.fluencetype=none
+
+# Play Integrity & Device Spoofing (Pixel 9 Pro XL)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.product.model=Pixel 9 Pro XL \
+    ro.product.brand=google \
+    ro.product.manufacturer=Google \
+    ro.build.product=komodo \
+    ro.build.description=komodo-user 15 AP3A.241005.015 12533533 release-keys \
+    ro.build.fingerprint=google/komodo/komodo:15/AP3A.241005.015/12533533:user/release-keys
+
+# Kernel Performance & Memory Management (A16 GKI Compliance)
+# CONFIG_CPU_FREQ_GOV_PERFORMANCE=y
+# CONFIG_ZRAM=y
+# CONFIG_LZ4_COMPRESSION=y
+# CONFIG_LRU_GEN=y
+# CONFIG_LRU_GEN_ENABLED=y
+# CONFIG_BPF_SYSCALL=y
+
 endif
